@@ -1,100 +1,143 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+
+
+// import fs from 'fs';
+// import path from 'path';
+
 
 export default function Home() {
+  interface Counter {
+    name: string;
+    description: string;
+    imagePath: string;
+    backgroundColor: string;
+    itemType: string;
+  }
+  interface Hero {
+    id: number;
+    name: string;
+    imagePath: string;
+    counters: Array<number>
+  }
+  const [selectedHeroes, setSelectedHeroes] = useState<Hero[]>([]);
+  // const imagesDir = path.join(process.cwd(), 'public/assets/images/heroes');
+  // const filenames = fs.readdirSync(imagesDir);
+
+  // const arrayOfHeroes = filenames.map((filename) => `/assets/images/heroes/${filename}`);
+  const counterObject = {
+    1: {
+      name: "Toxic Bullets",
+      description: "",
+      imagePath: "/assets/images/Toxic_Bullets.png",
+      backgroundColor: "#FCAC4D",
+      itemType: "Weapon"
+    },
+    2: {
+      name: "Warp Stone",
+      description: "",
+      imagePath: "/assets/images/Warp_Stone.png",
+      backgroundColor: "#FCAC4D",
+      itemType: "Weapon"
+    },
+    3: {
+      name: "Healbane",
+      description: "",
+      imagePath: "/assets/images/Healbane.png",
+      backgroundColor: "#86C921",
+      itemType: "Vitality"
+    },
+    4: {
+      name: "Etheral Shift",
+      description: "",
+      imagePath: "/assets/images/Etheral_Shift.png",
+      backgroundColor: "#DE9CFF",
+      itemType: "Spirit"
+    },
+  }
+  const arrayOfHeroes: Hero[] = [
+    {
+      id: 1,
+      name: "Abrams",
+      counters: [1, 3,4],
+      imagePath:'/assets/images/heroes/Abrams_card.png',
+    },
+    {
+      id: 2,
+      name: "Bebop",
+      counters: [4],
+      imagePath:'/assets/images/heroes/Bebop_card.png',
+    },
+    {
+      id: 3,
+      name: "Dynamo",
+      counters: [4],
+      imagePath:'/assets/images/heroes/Dynamo_card.png',
+    },
+    {
+      id: 4,
+      name: "Grey Talon",
+      counters: [4],
+      imagePath:'/assets/images/heroes/Grey_Talon_card.png',
+    },
+    {
+      id: 5,
+      name: "Haze",
+      counters: [2],
+      imagePath:'/assets/images/heroes/Haze_card.png',
+    },
+    {
+      id: 6,
+      name: "Infernus",
+      counters: [1,3],
+      imagePath:'/assets/images/heroes/Infernus_card.png',
+    },
+    
+  ];
+
+  const handleHeroSelection = (singleHero: Hero) => {
+    // Everytime a hero is clicked it should grab the icons as well
+    setSelectedHeroes((prev: Hero[])=> ([...prev, singleHero]))
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="">
+      <main className="flex flex-col items-center">
+          <h1 className="font-serif">Select your opponents:</h1>
+        <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start">
+        {arrayOfHeroes.map((singleHero: Hero)=> 
         <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
+          className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
+          key={singleHero.id}
+          src={singleHero.imagePath}
           alt="Next.js logo"
           width={180}
           height={38}
           priority
+          onClick={()=> setSelectedHeroes((prev: Hero[])=> ([...prev, singleHero]))}
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        )}
+        </section>
+        <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start">
+        {selectedHeroes.map((singleHero: Hero, index)=> 
+        <Image
+          className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
+          key={index}
+          src={singleHero.imagePath}
+          alt="Next.js logo"
+          width={100}
+          height={38}
+          priority
+          onClick={()=> setSelectedHeroes((prev: Hero[])=> ([...prev, singleHero]))}
+        />
+        )}
+        </section>
+        
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+       
       </footer>
     </div>
   );
