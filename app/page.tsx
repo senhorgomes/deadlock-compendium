@@ -32,28 +32,28 @@ export default function Home() {
       name: "Toxic Bullets",
       description: "",
       imagePath: "/assets/images/Toxic_Bullets.png",
-      backgroundColor: "weapon",
+      backgroundColor: "bg-weapon",
       itemType: "Weapon"
     },
     2: {
       name: "Warp Stone",
       description: "",
       imagePath: "/assets/images/Warp_Stone.png",
-      backgroundColor: "weapon",
+      backgroundColor: "bg-weapon",
       itemType: "Weapon"
     },
     3: {
       name: "Healbane",
       description: "",
       imagePath: "/assets/images/Healbane.png",
-      backgroundColor: "vitality",
+      backgroundColor: "bg-vitality",
       itemType: "Vitality"
     },
     4: {
       name: "Etheral Shift",
       description: "",
       imagePath: "/assets/images/Ethereal_Shift.png",
-      backgroundColor: "spirit",
+      backgroundColor: "bg-spirit",
       itemType: "Spirit"
     },
   }
@@ -140,7 +140,7 @@ export default function Home() {
               priority
             />
             {singleHero.counters.map((singleCounter: number, index)=>
-            <div className={`bg-${counterObject[singleCounter].backgroundColor}`}> 
+            <div className={`${counterObject[singleCounter].backgroundColor}`}> 
               <Image
               key={index}
               src={counterObject[singleCounter].imagePath}
