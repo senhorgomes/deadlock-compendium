@@ -27,12 +27,8 @@ export default function Home() {
     [counterName: string]: Array<Hero>;
   }
   const [selectedHeroes, setSelectedHeroes] = useState<HeroCounters>({});
-  // const imagesDir = path.join(process.cwd(), 'public/assets/images/heroes');
-  // const filenames = fs.readdirSync(imagesDir);
 
-  // 
-  // const arrayOfHeroes = filenames.map((filename) => `/assets/images/heroes/${filename}`);
-  const counterObject: {[key: number]: Counter} = {
+  const counterObject: { [key: number]: Counter } = {
     1: {
       name: "Toxic Bullets",
       description: "",
@@ -61,42 +57,112 @@ export default function Home() {
       backgroundColor: "bg-spirit",
       itemType: "Spirit"
     },
+    5: {
+      name: "Decay",
+      description: "",
+      imagePath: "/assets/images/Decay.png",
+      backgroundColor: "bg-spirit",
+      itemType: "Spirit"
+    },
+    6: {
+      name: "Debuff Remover",
+      description: "",
+      imagePath: "/assets/images/Debuff_Remover.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    7: {
+      name: "Rescue Beam",
+      description: "",
+      imagePath: "/assets/images/Rescue_Beam.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    8: {
+      name: "Reactive Barrier",
+      description: "",
+      imagePath: "/assets/images/Reactive_Barrier.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    9: {
+      name: "Soul Rebirth",
+      description: "",
+      imagePath: "/assets/images/Soul_Rebirth.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    10: {
+      name: "Unstoppable",
+      description: "",
+      imagePath: "/assets/images/Unstoppable.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    11: {
+      name: "Knockdown",
+      description: "",
+      imagePath: "/assets/images/Knockdown.png",
+      backgroundColor: "bg-spirit",
+      itemType: "Spirit"
+    },
+    12: {
+      name: "Return Fire",
+      description: "",
+      imagePath: "/assets/images/Return_Fire.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    13: {
+      name: "Metal Skin",
+      description: "",
+      imagePath: "/assets/images/Metal_Skin.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
+    14: {
+      name: "Slowing Hex",
+      description: "",
+      imagePath: "/assets/images/Slowing_Hex.png",
+      backgroundColor: "bg-spirit",
+      itemType: "Spirit"
+    },
   }
   const arrayOfHeroes: Hero[] = [
     {
       id: 1,
       name: "Abrams",
-      counters: [1, 3, 4],
+      counters: [1, 3, 4, 5],
       imagePath: '/assets/images/heroes/Abrams_card.png',
     },
     {
       id: 2,
       name: "Bebop",
-      counters: [4],
+      counters: [4, 6],
       imagePath: '/assets/images/heroes/Bebop_card.png',
     },
     {
       id: 3,
       name: "Dynamo",
-      counters: [4],
+      counters: [4, 7, 8, 9, 10],
       imagePath: '/assets/images/heroes/Dynamo_card.png',
     },
     {
       id: 4,
       name: "Grey Talon",
-      counters: [4],
+      counters: [4, 6, 11],
       imagePath: '/assets/images/heroes/Grey_Talon_card.png',
     },
     {
       id: 5,
       name: "Haze",
-      counters: [2],
+      counters: [2,12,13],
       imagePath: '/assets/images/heroes/Haze_card.png',
     },
     {
       id: 6,
       name: "Infernus",
-      counters: [1, 3],
+      counters: [1, 3, 5,6,14],
       imagePath: '/assets/images/heroes/Infernus_card.png',
     },
 
@@ -105,27 +171,26 @@ export default function Home() {
   const handleHeroSelection = (singleHero: Hero) => {
     // Everytime a hero is clicked it should grab the icons as well
     // When a hero is selected map the counters instead
-    const tempSelectedHeroes = {...selectedHeroes};
-      // first find the hero and remove it
-      
-      if(singleHero.counters){
-        // [1,2,3]
-        singleHero.counters.forEach((counter:number)=> {
-          // {1: []}?
-          if(tempSelectedHeroes[counter]){
-            if(tempSelectedHeroes[counter].find((element)=> element.id === singleHero.id)){
-              tempSelectedHeroes[counter].filter((hero)=> hero.id !== singleHero.id)
-            } else {
-              tempSelectedHeroes[counter] = [...tempSelectedHeroes[counter], singleHero];
-            }
+    const tempSelectedHeroes = { ...selectedHeroes };
+    // first find the hero and remove it
+
+    if (singleHero.counters) {
+      // [1,2,3]
+      singleHero.counters.forEach((counter: number) => {
+        // {1: []}?
+        if (tempSelectedHeroes[counter]) {
+          if (tempSelectedHeroes[counter].find((element) => element.id === singleHero.id)) {
+            tempSelectedHeroes[counter] = tempSelectedHeroes[counter].filter((filteredHero) => filteredHero.id !== singleHero.id)
           } else {
-            tempSelectedHeroes[counter] = [singleHero];
+            tempSelectedHeroes[counter] = [...tempSelectedHeroes[counter], singleHero];
           }
-        })
-      }
-      // if(isHeroSelect){
-      //   return prev.filter((hero)=> hero.id !== singleHero.id);
-      // }
+        } else {
+          tempSelectedHeroes[counter] = [singleHero];
+        }
+
+        tempSelectedHeroes[counter].length === 0 && delete tempSelectedHeroes[counter];
+      })
+    }
     setSelectedHeroes(tempSelectedHeroes)
   };
 
@@ -144,38 +209,43 @@ export default function Home() {
               width={180}
               height={38}
               priority
-              onClick={()=>handleHeroSelection(singleHero)}
+              onClick={() => handleHeroSelection(singleHero)}
             />
           )}
         </section>
-        <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start m-2">
+        <table >
+          <tbody className="flex flex-col gap-8 row-start-2 items-center sm:items-start m-2">
+
           {arrayOfCounterKeys.map((counterIndex: any, index) =>
-          <>
-            <Image
-              className={`${counterObject[counterIndex].backgroundColor}`}
-              key={index}
-              src={counterObject[counterIndex].imagePath}
-              alt={`${counterObject[counterIndex].name}'s picture`}
-              width={100}
-              height={38}
-              priority
-            />
-            {/* {selectedHeroes[counterIndex].map((singleHero: Hero, index)=>
-            <div className={`${counterObject[singleCounter].backgroundColor}`}> 
+            <tr key={counterIndex}>
+              <th scope="row">
+                <Image
+                  className={`${counterObject[counterIndex].backgroundColor}`}
+                  key={counterObject[counterIndex].backgroundColor}
+                  src={counterObject[counterIndex].imagePath}
+                  alt={`${counterObject[counterIndex].name}'s picture`}
+                  width={100}
+                  height={38}
+                  priority
+                />
+              </th>
+              {selectedHeroes[counterIndex].map((singleHero: Hero, index)=>
+            <td key={singleHero.id + singleHero.name}> 
               <Image
-              key={index}
-              src={counterObject[singleCounter].imagePath}
+              key={singleHero.id}
+              src={singleHero.imagePath}
               alt={`Image for Item`}
               width={100}
               height={38}
               priority
             />
-            </div>
-            )} */}
-          </>
+            </td>
+            )}
+            </tr>
 
           )}
-        </section>
+          </tbody>
+        </table>
 
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
