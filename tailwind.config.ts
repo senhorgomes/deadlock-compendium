@@ -11,6 +11,9 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        weapon: "#FCAC4D",
+        vitality: "#86C921",
+        spirit: "#DE9CFF"
       },
     },
   },

@@ -27,33 +27,33 @@ export default function Home() {
   // const filenames = fs.readdirSync(imagesDir);
 
   // const arrayOfHeroes = filenames.map((filename) => `/assets/images/heroes/${filename}`);
-  const counterObject = {
+  const counterObject: {[key: number]: Counter} = {
     1: {
       name: "Toxic Bullets",
       description: "",
       imagePath: "/assets/images/Toxic_Bullets.png",
-      backgroundColor: "#FCAC4D",
+      backgroundColor: "weapon",
       itemType: "Weapon"
     },
     2: {
       name: "Warp Stone",
       description: "",
       imagePath: "/assets/images/Warp_Stone.png",
-      backgroundColor: "#FCAC4D",
+      backgroundColor: "weapon",
       itemType: "Weapon"
     },
     3: {
       name: "Healbane",
       description: "",
       imagePath: "/assets/images/Healbane.png",
-      backgroundColor: "#86C921",
+      backgroundColor: "vitality",
       itemType: "Vitality"
     },
     4: {
       name: "Etheral Shift",
       description: "",
-      imagePath: "/assets/images/Etheral_Shift.png",
-      backgroundColor: "#DE9CFF",
+      imagePath: "/assets/images/Ethereal_Shift.png",
+      backgroundColor: "spirit",
       itemType: "Spirit"
     },
   }
@@ -100,7 +100,7 @@ export default function Home() {
   const handleHeroSelection = (singleHero: Hero) => {
     // Everytime a hero is clicked it should grab the icons as well
     setSelectedHeroes((prev: Hero[]) => {
-      const isHeroSelect = prev.find((element)=> element.id = singleHero.id)
+      const isHeroSelect = prev.find((element)=> element.id === singleHero.id)
       if(isHeroSelect){
         return prev.filter((hero)=> hero.id !== singleHero.id);
       }
@@ -123,12 +123,13 @@ export default function Home() {
               width={180}
               height={38}
               priority
-              onClick={() => setSelectedHeroes((prev: Hero[]) => ([...prev, singleHero]))}
+              onClick={()=>handleHeroSelection(singleHero)}
             />
           )}
         </section>
         <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start">
           {selectedHeroes.map((singleHero: Hero, index) =>
+          <>
             <Image
               className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
               key={index}
@@ -137,8 +138,22 @@ export default function Home() {
               width={100}
               height={38}
               priority
-              onClick={() => setSelectedHeroes((prev: Hero[]) => ([...prev, singleHero]))}
             />
+            {singleHero.counters.map((singleCounter: number, index)=>
+            <div className={`bg-${counterObject[singleCounter].backgroundColor}`}> 
+              <Image
+              className={`transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer `}
+              key={index}
+              src={counterObject[singleCounter].imagePath}
+              alt="Next.js logo"
+              width={100}
+              height={38}
+              priority
+            />
+            </div>
+            )}
+          </>
+
           )}
         </section>
 
