@@ -134,7 +134,7 @@ export default function Home() {
               className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
               key={index}
               src={singleHero.imagePath}
-              alt="Next.js logo"
+              alt={`${singleHero.name}'s picture`}
               width={100}
               height={38}
               priority
@@ -142,10 +142,9 @@ export default function Home() {
             {singleHero.counters.map((singleCounter: number, index)=>
             <div className={`bg-${counterObject[singleCounter].backgroundColor}`}> 
               <Image
-              className={`transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer `}
               key={index}
               src={counterObject[singleCounter].imagePath}
-              alt="Next.js logo"
+              alt={`Image for Item`}
               width={100}
               height={38}
               priority
