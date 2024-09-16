@@ -1,5 +1,6 @@
 "use client";
 
+import { isThenable } from "next/dist/client/components/router-reducer/router-reducer-types";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -20,12 +21,16 @@ export default function Home() {
     id: number;
     name: string;
     imagePath: string;
-    counters: Array<number>
+    counters: Array<number>;
   }
-  const [selectedHeroes, setSelectedHeroes] = useState<Hero[]>([]);
+  interface HeroCounters {
+    [counterName: string]: Array<Hero>;
+  }
+  const [selectedHeroes, setSelectedHeroes] = useState<HeroCounters>({});
   // const imagesDir = path.join(process.cwd(), 'public/assets/images/heroes');
   // const filenames = fs.readdirSync(imagesDir);
 
+  // 
   // const arrayOfHeroes = filenames.map((filename) => `/assets/images/heroes/${filename}`);
   const counterObject: {[key: number]: Counter} = {
     1: {
@@ -99,16 +104,32 @@ export default function Home() {
 
   const handleHeroSelection = (singleHero: Hero) => {
     // Everytime a hero is clicked it should grab the icons as well
-    setSelectedHeroes((prev: Hero[]) => {
-      const isHeroSelect = prev.find((element)=> element.id === singleHero.id)
-      if(isHeroSelect){
-        return prev.filter((hero)=> hero.id !== singleHero.id);
+    // When a hero is selected map the counters instead
+    const tempSelectedHeroes = {...selectedHeroes};
+      // first find the hero and remove it
+      
+      if(singleHero.counters){
+        // [1,2,3]
+        singleHero.counters.forEach((counter:number)=> {
+          // {1: []}?
+          if(tempSelectedHeroes[counter]){
+            if(tempSelectedHeroes[counter].find((element)=> element.id === singleHero.id)){
+              tempSelectedHeroes[counter].filter((hero)=> hero.id !== singleHero.id)
+            } else {
+              tempSelectedHeroes[counter] = [...tempSelectedHeroes[counter], singleHero];
+            }
+          } else {
+            tempSelectedHeroes[counter] = [singleHero];
+          }
+        })
       }
-      return [...prev, singleHero];
-    }
-    )
+      // if(isHeroSelect){
+      //   return prev.filter((hero)=> hero.id !== singleHero.id);
+      // }
+    setSelectedHeroes(tempSelectedHeroes)
   };
 
+  const arrayOfCounterKeys = Object.keys(selectedHeroes);
   return (
     <div className="">
       <main className="flex flex-col items-center">
@@ -127,19 +148,19 @@ export default function Home() {
             />
           )}
         </section>
-        <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start">
-          {selectedHeroes.map((singleHero: Hero, index) =>
+        <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start m-2">
+          {arrayOfCounterKeys.map((counterIndex: any, index) =>
           <>
             <Image
-              className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
+              className={`${counterObject[counterIndex].backgroundColor}`}
               key={index}
-              src={singleHero.imagePath}
-              alt={`${singleHero.name}'s picture`}
+              src={counterObject[counterIndex].imagePath}
+              alt={`${counterObject[counterIndex].name}'s picture`}
               width={100}
               height={38}
               priority
             />
-            {singleHero.counters.map((singleCounter: number, index)=>
+            {/* {selectedHeroes[counterIndex].map((singleHero: Hero, index)=>
             <div className={`${counterObject[singleCounter].backgroundColor}`}> 
               <Image
               key={index}
@@ -150,7 +171,7 @@ export default function Home() {
               priority
             />
             </div>
-            )}
+            )} */}
           </>
 
           )}
