@@ -274,13 +274,13 @@ export default function Home() {
     {
       id: 20,
       name: "Wraith",
-      counters: [4,6,14],
+      counters: [4,12,13],
       imagePath: '/assets/images/heroes/Wraith_card.png',
     },
     {
       id: 21,
       name: "Yamato",
-      counters: [12,13,15,16],
+      counters: [15,16],
       imagePath: '/assets/images/heroes/Yamato_card.png',
     },
 
@@ -332,7 +332,7 @@ export default function Home() {
           )}
         </section>
         <table >
-          <tbody className="flex flex-col gap-8 row-start-2 items-center sm:items-start m-2">
+          <tbody className="flex flex-col gap-8 items-start m-2">
 
           {arrayOfCounterKeys.map((counterIndex: any, index) =>
             <tr key={counterIndex}>
