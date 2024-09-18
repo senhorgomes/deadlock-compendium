@@ -141,6 +141,13 @@ export default function Home() {
       backgroundColor: "bg-weapon",
       itemType: "Weapon"
     },
+    17: {
+      name: "Monster Rounds",
+      description: "",
+      imagePath: "/assets/images/Monster_Rounds.png",
+      backgroundColor: "bg-weapon",
+      itemType: "Weapon"
+    },
   }
   const arrayOfHeroes: Hero[] = [
     {
@@ -202,6 +209,12 @@ export default function Home() {
       name: "Lash",
       counters: [4,14,15,16],
       imagePath: '/assets/images/heroes/Lash_card.png',
+    },
+    {
+      id: 11,
+      name: "McGinnis",
+      counters: [1, 3, 5,17],
+      imagePath: '/assets/images/heroes/McGinnis_card.png',
     },
 
   ];
