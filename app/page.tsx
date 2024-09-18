@@ -241,6 +241,18 @@ export default function Home() {
       counters: [6,15,16,18],
       imagePath: '/assets/images/heroes/Pocket_card.png',
     },
+    {
+      id: 15,
+      name: "Seven",
+      counters: [11],
+      imagePath: '/assets/images/heroes/Seven_card.png',
+    },
+    {
+      id: 16,
+      name: "Shiv",
+      counters: [1, 3, 5,6,18],
+      imagePath: '/assets/images/heroes/Shiv_card.png',
+    },
 
   ];
 
@@ -275,14 +287,14 @@ export default function Home() {
     <div className="">
       <main className="flex flex-col items-center">
         <h1 className="font-serif">Select your opponents:</h1>
-        <section className="flex flex-row flex-wrap gap-8 row-start-2 items-center sm:items-start">
+        <section className="flex flex-row flex-wrap justify-center gap-8 row-start-2 items-center sm:items-start">
           {arrayOfHeroes.map((singleHero: Hero) =>
             <Image
               className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
               key={singleHero.id}
               src={singleHero.imagePath}
               alt="Next.js logo"
-              width={180}
+              width={75}
               height={38}
               priority
               onClick={() => handleHeroSelection(singleHero)}
