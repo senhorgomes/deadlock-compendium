@@ -253,6 +253,12 @@ export default function Home() {
       counters: [1, 3, 5,6,18],
       imagePath: '/assets/images/heroes/Shiv_card.png',
     },
+    {
+      id: 17,
+      name: "Vindicta",
+      counters: [4,6],
+      imagePath: '/assets/images/heroes/Vindicta_card.png',
+    },
 
   ];
 
