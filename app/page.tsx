@@ -127,6 +127,13 @@ export default function Home() {
       backgroundColor: "bg-spirit",
       itemType: "Spirit"
     },
+    15: {
+      name: "Silence Glyph",
+      description: "",
+      imagePath: "/assets/images/Silence_Glyph.png",
+      backgroundColor: "bg-spirit",
+      itemType: "Spirit"
+    },
   }
   const arrayOfHeroes: Hero[] = [
     {
@@ -164,6 +171,12 @@ export default function Home() {
       name: "Infernus",
       counters: [1, 3, 5,6,14],
       imagePath: '/assets/images/heroes/Infernus_card.png',
+    },
+    {
+      id: 7,
+      name: "Ivy",
+      counters: [1,2, 3, 5, 15],
+      imagePath: '/assets/images/heroes/Ivy_card.png',
     },
 
   ];
