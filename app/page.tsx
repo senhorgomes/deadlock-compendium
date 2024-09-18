@@ -271,6 +271,18 @@ export default function Home() {
       counters: [4,6,14],
       imagePath: '/assets/images/heroes/Warden_card.png',
     },
+    {
+      id: 20,
+      name: "Wraith",
+      counters: [4,6,14],
+      imagePath: '/assets/images/heroes/Wraith_card.png',
+    },
+    {
+      id: 21,
+      name: "Yamato",
+      counters: [12,13,15,16],
+      imagePath: '/assets/images/heroes/Yamato_card.png',
+    },
 
   ];
 
