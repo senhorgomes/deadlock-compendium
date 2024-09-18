@@ -193,9 +193,15 @@ export default function Home() {
     },
     {
       id: 9,
-      name: "Kelvin",
+      name: "Lady Geist",
       counters: [1, 3, 5,15,16],
-      imagePath: '/assets/images/heroes/Kelvin_card.png',
+      imagePath: '/assets/images/heroes/Lady_Geist_card.png',
+    },
+    {
+      id: 10,
+      name: "Lash",
+      counters: [4,14,15,16],
+      imagePath: '/assets/images/heroes/Lash_card.png',
     },
 
   ];
@@ -231,7 +237,7 @@ export default function Home() {
     <div className="">
       <main className="flex flex-col items-center">
         <h1 className="font-serif">Select your opponents:</h1>
-        <section className="flex flex-row gap-8 row-start-2 items-center sm:items-start">
+        <section className="flex flex-row flex-wrap gap-8 row-start-2 items-center sm:items-start">
           {arrayOfHeroes.map((singleHero: Hero) =>
             <Image
               className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
