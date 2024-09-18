@@ -267,9 +267,9 @@ export default function Home() {
     },
     {
       id: 19,
-      name: "Vindicta",
+      name: "Warden",
       counters: [4,6,14],
-      imagePath: '/assets/images/heroes/Vindicta_card.png',
+      imagePath: '/assets/images/heroes/Warden_card.png',
     },
 
   ];
