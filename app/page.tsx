@@ -216,6 +216,12 @@ export default function Home() {
       counters: [1, 3, 5,17],
       imagePath: '/assets/images/heroes/McGinnis_card.png',
     },
+    {
+      id: 12,
+      name: "Mo & Krill",
+      counters: [1, 3, 5,8, 14,15],
+      imagePath: '/assets/images/heroes/Mo_&_Krill_card.png',
+    },
 
   ];
 
