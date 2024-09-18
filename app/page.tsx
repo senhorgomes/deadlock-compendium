@@ -259,6 +259,18 @@ export default function Home() {
       counters: [4,6],
       imagePath: '/assets/images/heroes/Vindicta_card.png',
     },
+    {
+      id: 18,
+      name: "Viscous",
+      counters: [15,16],
+      imagePath: '/assets/images/heroes/Viscous_card.png',
+    },
+    {
+      id: 19,
+      name: "Vindicta",
+      counters: [4,6,14],
+      imagePath: '/assets/images/heroes/Vindicta_card.png',
+    },
 
   ];
 
