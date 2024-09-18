@@ -148,6 +148,13 @@ export default function Home() {
       backgroundColor: "bg-weapon",
       itemType: "Weapon"
     },
+    18: {
+      name: "Debuff Reducer",
+      description: "",
+      imagePath: "/assets/images/Debuff_Reducer.png",
+      backgroundColor: "bg-vitality",
+      itemType: "Vitality"
+    },
   }
   const arrayOfHeroes: Hero[] = [
     {
@@ -221,6 +228,18 @@ export default function Home() {
       name: "Mo & Krill",
       counters: [1, 3, 5,8, 14,15],
       imagePath: '/assets/images/heroes/Mo_&_Krill_card.png',
+    },
+    {
+      id: 13,
+      name: "Paradox",
+      counters: [4],
+      imagePath: '/assets/images/heroes/Paradox_card.png',
+    },
+    {
+      id: 14,
+      name: "Pocket",
+      counters: [6,15,16,18],
+      imagePath: '/assets/images/heroes/Pocket_card.png',
     },
 
   ];
