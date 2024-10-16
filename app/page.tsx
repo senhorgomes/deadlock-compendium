@@ -1,12 +1,7 @@
 "use client";
 
-import { isThenable } from "next/dist/client/components/router-reducer/router-reducer-types";
 import Image from "next/image";
 import { useState } from "react";
-
-
-// import fs from 'fs';
-// import path from 'path';
 
 
 export default function Home() {
@@ -27,6 +22,7 @@ export default function Home() {
     [counterName: string]: Array<Hero>;
   }
   const [selectedHeroes, setSelectedHeroes] = useState<HeroCounters>({});
+  const [highlightedHeroId, setHighlightedHeroId] = useState<number | null>(null);
 
   const counterObject: { [key: number]: Counter } = {
     1: {
@@ -285,7 +281,9 @@ export default function Home() {
     },
 
   ];
-
+  const handleHeroHover = (heroId: number | null) => {
+    setHighlightedHeroId(heroId);
+  };
   const handleHeroSelection = (singleHero: Hero) => {
     // Everytime a hero is clicked it should grab the icons as well
     // When a hero is selected map the counters instead
@@ -320,7 +318,9 @@ export default function Home() {
         <section className="flex flex-row flex-wrap justify-center gap-8 row-start-2 items-center sm:items-start">
           {arrayOfHeroes.map((singleHero: Hero) =>
             <Image
-              className="transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer"
+              className={`transition duration-500 hover:scale-110 hover:bg-stone-400 hover:cursor-pointer ${selectedHeroes && Object.values(selectedHeroes).some((heroes) => heroes.some((hero) => hero.id === singleHero.id))
+              ? "bg-stone-400"
+              : ""}`}
               key={singleHero.id}
               src={singleHero.imagePath}
               alt="Next.js logo"
@@ -348,9 +348,11 @@ export default function Home() {
                 />
               </th>
               {selectedHeroes[counterIndex].map((singleHero: Hero, index)=>
-            <td key={singleHero.id + singleHero.name}> 
+            <td key={singleHero.id + singleHero.name} onMouseEnter={() => handleHeroHover(singleHero.id)} 
+            onMouseLeave={() => handleHeroHover(null)}>
               <Image
               key={singleHero.id}
+              className={`${highlightedHeroId === singleHero.id ? 'border-2 border-yellow-500' : ''}`}
               src={singleHero.imagePath}
               alt={`Image for Item`}
               width={100}
@@ -366,9 +368,6 @@ export default function Home() {
         </table>
 
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-
-      </footer>
     </div>
   );
 }
